@@ -52,6 +52,7 @@ int main(int argc, char **argv){
 					rv = ioctl(fd, FM_SET_SPACE, &val);
 					printf("[FM_SET_SPACE] - rv = %d\n", rv);
 				}
+				break;
 			case 'v' :
 				// Volume
 				argv_value = optarg;
