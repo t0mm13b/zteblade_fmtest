@@ -15,7 +15,7 @@ int main(int argc, char **argv){
 	char *p, line[81];
 	const char *delim = "#;,\\n";
 	int fd = open(FM_DEV, O_RDONLY);
-	while ((argc_c = getopt(argc, argv, "01a:b:j:ft:s:h")) != -1){
+	while ((argc_c = getopt(argc, argv, "01a:b:j:ft:s:v:h")) != -1){
 		switch(argc_c){
 			case 'a' :
 				// Audio Track
