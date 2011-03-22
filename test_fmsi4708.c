@@ -12,10 +12,10 @@ int main(int argc, char **argv){
 	int status = 0, rv = 0;
 	char *argv_value = NULL;
 	int argc_c, val, val_list[2];
-	char *p;
+	char *p, line[81];
 	const char *delim = "#;,\\n";
 	int fd = open(FM_DEV, O_RDONLY);
-	while ((argc_c = getopt(argc, argv, "01a:b:v:ft:s:h")) != -1){
+	while ((argc_c = getopt(argc, argv, "01a:b:j:ft:s:h")) != -1){
 		switch(argc_c){
 			case 'a' :
 				// Audio Track
@@ -32,7 +32,26 @@ int main(int argc, char **argv){
 			case 'b' :
 				// Band
 				argv_value = optarg;
+				if (argv_value == NULL || !strlen(argv_value)){
+					rv = ioctl(fd, FM_GET_BAND, &status);
+					printf("[FM_GET_BAND] - rv = %d; status = %d\n", rv, status);
+				}else{
+					sscanf(argv_value, "%d", &val);
+					rv = ioctl(fd, FM_SET_BAND, &val);
+					printf("[FM_SET_BAND] - rv = %d\n", rv);
+				}
 				break;
+			case 'j' :
+				// Spacers
+				argv_value = optarg;
+				if (argv_value == NULL || !strlen(argv_value)){
+					rv = ioctl(fd, FM_GET_SPACE, &status);
+					printf("[FM_GET_SPACE] - rv = %d; status = %d\n", rv, status);
+				}else{
+					sscanf(argv_value, "%d", &val);
+					rv = ioctl(fd, FM_SET_SPACE, &val);
+					printf("[FM_SET_SPACE] - rv = %d\n", rv);
+				}
 			case 'v' :
 				// Volume
 				argv_value = optarg;
@@ -94,6 +113,7 @@ int main(int argc, char **argv){
 				abort();
 		}
 	}
+	sleep(100000); // sleep for a bit to keep the radio 'alive' - kudos TomG :D
 	close(fd);
 	return 0;
 }
