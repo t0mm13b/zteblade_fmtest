@@ -1,3 +1,25 @@
 Simple test program to interface directly with ZTE Blade's FMRadio Chipset.
 
 Not responsible for any major screwups - you're on your own :P
+
+Parameters where n is specified as digit(s):
+	-a [n]		Audio Track, 0 for Stereo, 1 for Mono
+	-b [n]		Band mode, 0 for Generic, 1 for Japan Wide, 2 for Japan, 3 for reserved... (snoop in on CB's?)
+	-f			Displays the current frequency, this is known to "stick" to 8750 ... a BUG... \o/
+	-j [n]		Jump Spacer, 0 for 50Khz, 1 for 100Khz, 2 for 200Khz (I think?)
+	-s [x,y]	AutoSeek, x can be 0 for seek down, 1 for seek up. y can be a frequency you want to autoseek to.
+	-t [n]		Tune into specified frequency
+	-v [n]		Volume, 0 is mute, 15 is max... not 100% sure, if this can be confirmed...
+	-1			Turns on radio
+	-0			Turns off radio
+
+Info regarding RDS and Andorko's patch, this will need investigating as there is no ioctl for that.... will double check!
+
+Combine them all to see what results you get... and let me know...
+
+Oh and yeah, hold down Ctrl, hit C, release Ctrl. to break and end the program.
+
+PROOF OF CONCEPT WORKS \/\/00+ \o/
+
+Have fun
+	~ t0mm13b
